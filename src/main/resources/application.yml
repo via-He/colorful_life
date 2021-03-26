@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    name: colorfullife
+    url: jdbc:mysql://127.0.0.1:3306/colorfullife?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+server:
+  port: 8880
+mybatis:
+  mapper-locations: classpath:mapperxml/*.xml
+
+file:
+  upload:
+    dir: C:\Users\qingqing.he\Pictures\colorfulLife\image

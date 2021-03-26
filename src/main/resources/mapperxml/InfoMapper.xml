@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hqq.colorful_life.model.dao.InfoMapper">
+  <resultMap id="BaseResultMap" type="com.hqq.colorful_life.model.domain.Info">
+    <!--@mbg.generated-->
+    <!--@Table info-->
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="info_column" jdbcType="VARCHAR" property="infoColumn" />
+    <result column="info_tittle" jdbcType="VARCHAR" property="infoTittle" />
+    <result column="info_user" jdbcType="VARCHAR" property="infoUser" />
+    <result column="info_time" jdbcType="TIMESTAMP" property="infoTime" />
+    <result column="info_Url" jdbcType="VARCHAR" property="infoUrl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    ID, info_column, info_tittle, info_user, info_time, info_Url
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from info
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from info
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hqq.colorful_life.model.domain.Info">
+    <!--@mbg.generated-->
+    insert into info (ID, info_column, info_tittle, 
+      info_user, info_time, info_Url
+      )
+    values (#{id,jdbcType=INTEGER}, #{infoColumn,jdbcType=VARCHAR}, #{infoTittle,jdbcType=VARCHAR}, 
+      #{infoUser,jdbcType=VARCHAR}, #{infoTime,jdbcType=TIMESTAMP}, #{infoUrl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hqq.colorful_life.model.domain.Info">
+    <!--@mbg.generated-->
+    insert into info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="infoColumn != null">
+        info_column,
+      </if>
+      <if test="infoTittle != null">
+        info_tittle,
+      </if>
+      <if test="infoUser != null">
+        info_user,
+      </if>
+      <if test="infoTime != null">
+        info_time,
+      </if>
+      <if test="infoUrl != null">
+        info_Url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="infoColumn != null">
+        #{infoColumn,jdbcType=VARCHAR},
+      </if>
+      <if test="infoTittle != null">
+        #{infoTittle,jdbcType=VARCHAR},
+      </if>
+      <if test="infoUser != null">
+        #{infoUser,jdbcType=VARCHAR},
+      </if>
+      <if test="infoTime != null">
+        #{infoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="infoUrl != null">
+        #{infoUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hqq.colorful_life.model.domain.Info">
+    <!--@mbg.generated-->
+    update info
+    <set>
+      <if test="infoColumn != null">
+        info_column = #{infoColumn,jdbcType=VARCHAR},
+      </if>
+      <if test="infoTittle != null">
+        info_tittle = #{infoTittle,jdbcType=VARCHAR},
+      </if>
+      <if test="infoUser != null">
+        info_user = #{infoUser,jdbcType=VARCHAR},
+      </if>
+      <if test="infoTime != null">
+        info_time = #{infoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="infoUrl != null">
+        info_Url = #{infoUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hqq.colorful_life.model.domain.Info">
+    <!--@mbg.generated-->
+    update info
+    set info_column = #{infoColumn,jdbcType=VARCHAR},
+      info_tittle = #{infoTittle,jdbcType=VARCHAR},
+      info_user = #{infoUser,jdbcType=VARCHAR},
+      info_time = #{infoTime,jdbcType=TIMESTAMP},
+      info_Url = #{infoUrl,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
