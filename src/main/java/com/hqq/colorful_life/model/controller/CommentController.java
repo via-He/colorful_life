@@ -36,5 +36,13 @@ public class CommentController {
         return ApiRestResponse.success(content);
     }
 
+    @ApiOperation("删除评论")
+    @PostMapping("/delete")
+    public ApiRestResponse delete(@RequestParam Integer commentId){
+        int i = commentService.deleteByPrimaryKey(commentId);
+        return ApiRestResponse.success(i);
+    }
+
+
 
 }

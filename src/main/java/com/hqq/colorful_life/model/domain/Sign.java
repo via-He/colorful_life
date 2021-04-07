@@ -1,5 +1,6 @@
 package com.hqq.colorful_life.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
@@ -8,7 +9,7 @@ import lombok.Data;
 
 /**
  * @author Qingqing.He
- * @date 2021/3/23 17:42
+ * @date 2021/4/6 13:38
  */
 @ApiModel(value = "com.hqq.colorful_life.model.domain.Sign")
 @Data
@@ -24,6 +25,12 @@ public class Sign {
      */
     @ApiModelProperty(value = "签到用户")
     private Integer userId;
+
+    /**
+     * 签到标题
+     */
+    @ApiModelProperty(value = "签到标题")
+    private String title;
 
     /**
      * 签到内容
@@ -77,5 +84,7 @@ public class Sign {
      * 签到时间
      */
     @ApiModelProperty(value = "签到时间")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date updateTime;
+
 }

@@ -11,7 +11,7 @@ import java.net.URI;
  */
 @Component
 public class Constant {
-    public static final String MALL_USER = "mall_user";
+    public static final String USER = "user";
     public static final String SALT = "csfFEW,LPLE3;';]";
 
     //上传图片地址

@@ -2,6 +2,8 @@ package com.hqq.colorful_life.model.dao;
 
 import com.hqq.colorful_life.model.domain.Channel;
 
+import java.util.List;
+
 
 /**
  * @author Qingqing.He
@@ -19,4 +21,6 @@ public interface ChannelMapper {
     int updateByPrimaryKeySelective(Channel record);
 
     int updateByPrimaryKey(Channel record);
+
+    List<String> selectAllChannelName();
 }

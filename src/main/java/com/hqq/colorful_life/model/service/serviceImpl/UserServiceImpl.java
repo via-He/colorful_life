@@ -107,7 +107,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public PageInfo selectUserList(Integer pageNum, Integer pageSize) {
 
-        PageHelper.startPage(pageNum,pageSize);
+        PageHelper.startPage(pageNum, pageSize);
         List<User> users = userMapper.selectAllUser();
         PageInfo<User> userPageInfo = new PageInfo<>(users);
         return userPageInfo;
@@ -116,9 +116,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void update(User user) {
 
-        log.info("当前修改的用户信息"+user);
+        log.info("当前修改的用户信息" + user);
         userMapper.updateByPrimaryKeySelective(user);
     }
 
 }
+
 

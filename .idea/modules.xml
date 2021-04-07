@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/colorful_life.iml" filepath="$PROJECT_DIR$/colorful_life.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../vue-colorful_life/vue-colorful_life.iml" filepath="$PROJECT_DIR$/../vue-colorful_life/vue-colorful_life.iml" />
     </modules>
   </component>
 </project>

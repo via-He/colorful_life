@@ -13,26 +13,18 @@ import com.hqq.colorful_life.model.service.SysUserService;
 import com.hqq.colorful_life.model.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.UUID;
 
 /**
  * @author Qingqing.He
@@ -40,6 +32,7 @@ import java.util.UUID;
  */
 
 @Slf4j
+@CrossOrigin
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -52,7 +45,7 @@ public class UserController {
     @ApiOperation("查询指定id的用户")
     @GetMapping("/admin/byId")
     public ApiRestResponse personalPage(@RequestParam Integer userId,HttpSession session){
-        Object attribute = session.getAttribute(Constant.MALL_USER);
+        Object attribute = session.getAttribute(Constant.USER);
         if (attribute == null)
         {
             throw new UniteException(ExceptionEnum.NEED_LOGIN);
@@ -124,7 +117,8 @@ public class UserController {
         //为了安全性，将密码设置为空 即返回user时密码为空
 
         user.setPassword(null);
-        session.setAttribute(Constant.MALL_USER, user);
+        session.setAttribute(Constant.USER, user);
+        log.info(session.getAttribute(Constant.USER)+"hffffffff");
         return ApiRestResponse.success(user);
     }
 
@@ -136,8 +130,8 @@ public class UserController {
     @ApiOperation("登出，清除session")
     @PostMapping("/logout")
     public ApiRestResponse logout(HttpSession session){
-        session.removeAttribute(Constant.MALL_USER);
-        log.info("退出后查看session"+session.getAttribute(Constant.MALL_USER));
+        session.removeAttribute(Constant.USER);
+        log.info("退出后查看session"+session.getAttribute(Constant.USER));
         return ApiRestResponse.success();
     }
 
@@ -163,7 +157,7 @@ public class UserController {
 
         SysUser sysUser = sysUserService.login(userName, password);
         sysUser.setPassword(null);
-        session.setAttribute(Constant.MALL_USER,sysUser);
+        session.setAttribute(Constant.USER, sysUser);
 
         return ApiRestResponse.success(sysUser);
 
@@ -178,7 +172,7 @@ public class UserController {
     @ApiOperation("更新个人资料")
     @PostMapping("/update")
     public ApiRestResponse update(@RequestBody UpdateUserReq updateUserReq,HttpSession session){
-        User user = (User)session.getAttribute(Constant.MALL_USER);
+        User user = (User)session.getAttribute(Constant.USER);
         BeanUtils.copyProperties(updateUserReq,user);
         userService.update(user);
         return ApiRestResponse.success();

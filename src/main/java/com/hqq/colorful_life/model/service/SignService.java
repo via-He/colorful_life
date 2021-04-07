@@ -1,5 +1,6 @@
 package com.hqq.colorful_life.model.service;
 
+import com.github.pagehelper.PageInfo;
 import com.hqq.colorful_life.model.domain.Sign;
 
 /**
@@ -22,6 +23,10 @@ public interface SignService {
     int updateByPrimaryKey(Sign record);
 
     int addComment(Integer signId, String comment);
+
+    PageInfo selectSignList(Integer pageNum, Integer pageSize);
+
+    Integer selectSignNum(Integer userId);
 }
 
 

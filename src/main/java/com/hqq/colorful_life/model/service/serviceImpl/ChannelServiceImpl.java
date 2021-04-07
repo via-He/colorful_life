@@ -6,6 +6,8 @@ import com.hqq.colorful_life.model.domain.Channel;
 import com.hqq.colorful_life.model.dao.ChannelMapper;
 import com.hqq.colorful_life.model.service.ChannelService;
 
+import java.util.List;
+
 /**
  * @author Qingqing.He
  * @date 2021/3/16 10:46
@@ -44,6 +46,13 @@ public class ChannelServiceImpl implements ChannelService {
     @Override
     public int updateByPrimaryKey(Channel record) {
         return channelMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<String> listChannel() {
+
+        List<String> channelName = channelMapper.selectAllChannelName();
+        return channelName;
     }
 
 }

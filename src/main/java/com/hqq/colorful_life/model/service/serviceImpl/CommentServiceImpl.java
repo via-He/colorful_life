@@ -23,6 +23,9 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public int deleteByPrimaryKey(Integer id) {
+        if (id == null){
+            throw new UniteException(ExceptionEnum.REQUEST_PARAM_ERROR);
+        }
         return commentMapper.deleteByPrimaryKey(id);
     }
 

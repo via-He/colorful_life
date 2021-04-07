@@ -3,9 +3,8 @@ package com.hqq.colorful_life.filter;
 import com.hqq.colorful_life.common.Constant;
 import com.hqq.colorful_life.model.domain.SysUser;
 import com.hqq.colorful_life.model.domain.User;
-import com.hqq.colorful_life.model.service.UserService;
+import org.springframework.web.filter.GenericFilterBean;
 
-import javax.annotation.Resource;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -38,9 +37,16 @@ public class AdminFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws
                                                                                                                   IOException,
                                                                                                                   ServletException {
-        HttpServletRequest request = (HttpServletRequest)servletRequest;
+        System.out.println("=====================================过滤器aaaaaaaa");
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+       /* HttpServletResponse response = (HttpServletResponse) servletResponse;
+        response.setHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT, GET");
+        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Allow-Headers", "x-requested-with");*/
+
         HttpSession session = request.getSession();
-        Object attribute = session.getAttribute(Constant.MALL_USER);
+        Object attribute = session.getAttribute(Constant.USER);
         currentSysUser = (SysUser) attribute;
         if (attribute == null) {
             PrintWriter out = new HttpServletResponseWrapper((HttpServletResponse) servletResponse).getWriter();
@@ -54,13 +60,13 @@ public class AdminFilter implements Filter {
 
         if (attribute instanceof User) {
             PrintWriter out = new HttpServletResponseWrapper((HttpServletResponse) servletResponse).getWriter();
-            out.write("{\n" + "    \"status\": 10009,\n" + "    \"msg\": \"NEED_ADMIN\",\n" + "    " +
-                          "\"data\": null\n" + "}");
+            out.write(
+                "{\n" + "    \"status\": 10009,\n" + "    \"msg\": \"NEED_ADMIN\",\n" + "    " + "\"data\": null\n" + "}");
             out.flush();
             out.close();
             return;
         } else {
-            filterChain.doFilter(servletRequest,servletResponse);
+            filterChain.doFilter(servletRequest, servletResponse);
         }
 
 

@@ -8,7 +8,7 @@ import lombok.Data;
 
 /**
  * @author Qingqing.He
- * @date 2021/3/17 17:40
+ * @date 2021/4/7 14:35
  */
 @ApiModel(value = "com.hqq.colorful_life.model.domain.User")
 @Data
@@ -50,10 +50,10 @@ public class User {
     private String signature;
 
     /**
-     * 签到内容id
+     * 签到次数
      */
-    @ApiModelProperty(value = "签到内容id")
-    private Integer signId;
+    @ApiModelProperty(value = "签到次数")
+    private Integer signNum;
 
     /**
      * 创作内容id

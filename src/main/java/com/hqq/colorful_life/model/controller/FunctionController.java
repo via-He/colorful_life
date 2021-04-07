@@ -4,16 +4,21 @@ import com.hqq.colorful_life.common.ApiRestResponse;
 import com.hqq.colorful_life.common.Constant;
 import com.hqq.colorful_life.exception.ExceptionEnum;
 import com.hqq.colorful_life.exception.UniteException;
+import com.hqq.colorful_life.model.service.ChannelService;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -24,6 +29,8 @@ import java.util.UUID;
 public class FunctionController {
 
     public static String getUri ="";
+    @Resource
+    ChannelService channelService;
 
     /**
      * 图片上传
@@ -81,5 +88,12 @@ public class FunctionController {
             effectiveURI = null;
         }
         return effectiveURI;
+    }
+
+    @ApiOperation("查询所有频道名称")
+    @GetMapping("/listChannel")
+    public ApiRestResponse listChannel(){
+        List<String> channel = channelService.listChannel();
+        return ApiRestResponse.success(channel);
     }
 }

@@ -64,4 +64,8 @@
     set `name` = #{name,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+    <select id="selectAllChannelName" resultType="java.lang.String">
+      select  name
+      from channel
+    </select>
 </mapper>

@@ -12,4 +12,4 @@ mybatis:
 
 file:
   upload:
-    dir: C:\Users\qingqing.he\Pictures\colorfulLife\image
+    dir: F:\qingqing.he\IdeaProjectDownloads\vue-colorful_life\src\images\

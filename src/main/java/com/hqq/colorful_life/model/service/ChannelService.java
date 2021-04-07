@@ -2,6 +2,8 @@ package com.hqq.colorful_life.model.service;
 
 import com.hqq.colorful_life.model.domain.Channel;
 
+import java.util.List;
+
 /**
  * @author Qingqing.He
  * @date 2021/3/16 10:46
@@ -21,5 +23,6 @@ public interface ChannelService {
 
     int updateByPrimaryKey(Channel record);
 
+    List<String> listChannel();
 }
 

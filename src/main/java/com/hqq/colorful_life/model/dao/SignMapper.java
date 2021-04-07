@@ -1,11 +1,11 @@
 package com.hqq.colorful_life.model.dao;
 
-import com.hqq.colorful_life.model.domain.Sign;
+import com.hqq.colorful_life.model.domain.Sign;import java.util.List;
 
 
 /**
  * @author Qingqing.He
- * @date 2021/3/23 17:42
+ * @date 2021/4/6 13:38
  */
 public interface SignMapper {
     int deleteByPrimaryKey(Integer id);
@@ -19,4 +19,8 @@ public interface SignMapper {
     int updateByPrimaryKeySelective(Sign record);
 
     int updateByPrimaryKey(Sign record);
+
+    List<Sign> selectAllSign(Integer userId);
+
+    Integer selectSignNum(Integer userId);
 }
