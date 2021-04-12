@@ -181,8 +181,9 @@
       from sign
       where user_id = #{userId,jdbcType=INTEGER}
     </select>
-    <select id="selectSignNum" resultType="java.lang.Integer">
-      select count (*)
-      from sign where user_id = #{userId,jdbcType=INTEGER}
+    <select id="selectSignNum" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+      select count(*)
+      from sign
+      where user_id = #{userId,jdbcType=INTEGER}
     </select>
 </mapper>

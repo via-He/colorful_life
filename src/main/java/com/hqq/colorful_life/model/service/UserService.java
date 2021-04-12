@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.hqq.colorful_life.model.domain.User;
 import com.hqq.colorful_life.model.request.UpdateUserReq;
 
+import java.util.List;
+
 /**
  * @author Qingqing.He
  * @date 2021/3/16 10:46
@@ -30,5 +32,7 @@ public interface UserService {
     PageInfo selectUserList(Integer pageNum, Integer pageSize);
 
     void update(User user);
+
+    List<User> findUserOrderBySignNum();
 }
 

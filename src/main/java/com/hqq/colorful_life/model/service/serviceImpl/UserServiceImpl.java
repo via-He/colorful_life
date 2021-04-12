@@ -120,6 +120,13 @@ public class UserServiceImpl implements UserService {
         userMapper.updateByPrimaryKeySelective(user);
     }
 
+    @Override
+    public List<User> findUserOrderBySignNum() {
+
+        List<User> users = userMapper.selectAllUser();
+        return users;
+    }
+
 }
 
 

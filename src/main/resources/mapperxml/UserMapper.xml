@@ -169,5 +169,6 @@
       select
       <include refid="Base_Column_List" />
       from user
+      order by sign_num desc
     </select>
 </mapper>
