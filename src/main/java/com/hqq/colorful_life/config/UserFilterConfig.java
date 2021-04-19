@@ -26,6 +26,7 @@ public class UserFilterConfig {
         filterFilterRegistrationBean.setFilter(userFilter());
         filterFilterRegistrationBean.addUrlPatterns("/sign/*");
         filterFilterRegistrationBean.addUrlPatterns("/order/*");
+        filterFilterRegistrationBean.addUrlPatterns("/create/*");
         filterFilterRegistrationBean.setName("userFilterConf");
         return filterFilterRegistrationBean;
     }

@@ -1,6 +1,9 @@
 package com.hqq.colorful_life.model.dao;
 
-import com.hqq.colorful_life.model.domain.Sign;import java.util.List;
+import com.hqq.colorful_life.model.domain.Sign;
+import com.hqq.colorful_life.model.response.MomentAndSignResp;
+
+import java.util.List;
 
 
 /**
@@ -23,4 +26,7 @@ public interface SignMapper {
     List<Sign> selectAllSign(Integer userId);
 
     Integer selectSignNum(Integer userId);
+
+    List<Sign> selectByChannelName(String channelName);
+
 }

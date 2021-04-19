@@ -1,9 +1,12 @@
 package com.hqq.colorful_life.model.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.hqq.colorful_life.common.ApiRestResponse;
 import com.hqq.colorful_life.filter.UserFilter;
 import com.hqq.colorful_life.model.request.AddCreateItemReq;
 import com.hqq.colorful_life.model.service.CreateItemService;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +36,14 @@ public class CreateItemController {
         addCreateItemReq.setUserId(userId);
         createItemService.create(addCreateItemReq);
         return ApiRestResponse.success();
+    }
+
+    @ApiModelProperty("用户分页查看瞬间内容")
+    @GetMapping("/listAll")
+    public ApiRestResponse listAll(@RequestParam Integer pageNum,@RequestParam Integer pageSize){
+         PageInfo pageInfo = createItemService.listAll(pageNum,pageSize);
+        return ApiRestResponse.success(pageInfo);
+
     }
 
     @GetMapping("/delete")

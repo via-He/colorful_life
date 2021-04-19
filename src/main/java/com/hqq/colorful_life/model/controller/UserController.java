@@ -118,6 +118,7 @@ public class UserController {
 
         user.setPassword(null);
         session.setAttribute(Constant.USER, user);
+        session.setMaxInactiveInterval(60*60);//过期时间一小时
         log.info(session.getAttribute(Constant.USER)+"hffffffff");
         return ApiRestResponse.success(user);
     }

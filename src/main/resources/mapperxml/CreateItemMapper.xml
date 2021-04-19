@@ -140,4 +140,16 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+    <select id="listAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+      select <include refid="Base_Column_List"/>
+      from create_item
+      where user_id = #{id,jdbcType=INTEGER}
+      order by update_time desc
+    </select>
+    <select id="selectByChannelName" resultMap="BaseResultMap" parameterType="java.lang.String">
+      select <include refid="Base_Column_List"/>
+      from create_item
+      where channel_name = #{channelName}
+      order by update_time desc
+    </select>
 </mapper>

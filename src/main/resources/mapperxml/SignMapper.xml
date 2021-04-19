@@ -186,4 +186,10 @@
       from sign
       where user_id = #{userId,jdbcType=INTEGER}
     </select>
+    <select id="selectByChannelName" resultMap="BaseResultMap" parameterType="java.lang.String">
+      select <include refid="Base_Column_List"/>
+      from sign
+      where channel_name = #{channelName}
+      order by update_time desc
+    </select>
 </mapper>

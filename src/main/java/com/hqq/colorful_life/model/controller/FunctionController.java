@@ -1,11 +1,14 @@
 package com.hqq.colorful_life.model.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.hqq.colorful_life.common.ApiRestResponse;
 import com.hqq.colorful_life.common.Constant;
 import com.hqq.colorful_life.exception.ExceptionEnum;
 import com.hqq.colorful_life.exception.UniteException;
 import com.hqq.colorful_life.model.domain.User;
 import com.hqq.colorful_life.model.service.ChannelService;
+import com.hqq.colorful_life.model.service.CreateItemService;
+import com.hqq.colorful_life.model.service.SignService;
 import com.hqq.colorful_life.model.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +40,12 @@ public class FunctionController {
 
     @Resource
     UserService userService;
+
+    @Resource
+    SignService signService;
+
+    @Resource
+    CreateItemService createItemService;
 
     /**
      * 图片上传
@@ -118,5 +127,30 @@ public class FunctionController {
             newUser.add(user);
         }
         return ApiRestResponse.success(newUser);
+    }
+
+    @ApiOperation("根据指定频道名称查询签到内容")
+    @GetMapping("/listSignByChannelName")
+    public ApiRestResponse listSignByChannelName(@RequestParam Integer pageNum,@RequestParam Integer pageSize,@RequestParam String channelName){
+
+        PageInfo pageInfo = signService.listSignByChannelName(pageNum,pageSize,channelName);
+        return ApiRestResponse.success(pageInfo);
+    }
+
+    @ApiOperation("根据指定频道名称查询瞬间内容")
+    @GetMapping("/listMomentByChannelName")
+    public ApiRestResponse listMomentByChannelName(@RequestParam Integer pageNum,@RequestParam Integer pageSize,@RequestParam String channelName){
+
+        PageInfo pageInfo = createItemService.selectByChannelName(pageNum,pageSize,channelName);
+        return ApiRestResponse.success(pageInfo);
+    }
+
+
+    @ApiOperation("根据指定频道名称查询签到和瞬间内容")
+    @GetMapping("/listByChannelName")
+    public ApiRestResponse listAllContentByChannelName(@RequestParam Integer pageNum,@RequestParam Integer pageSize,@RequestParam String channelName){
+
+        PageInfo pageInfo = signService.listAllByChannelName(pageNum,pageSize,channelName);
+        return ApiRestResponse.success(pageInfo);
     }
 }

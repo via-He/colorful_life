@@ -48,12 +48,12 @@ public class UserFilter implements Filter {
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT, GET");
         response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
-//        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Credentials","true");
         HttpSession session = request.getSession();
 
         currentUser = (User) session.getAttribute(Constant.USER);
-        log.info(currentUser+"qqqqqqqqqqqqqqqqq");
+        log.info("已拿到当前用户currentUser:{}"+currentUser);
         if (currentUser == null){
             PrintWriter out = new HttpServletResponseWrapper((HttpServletResponse) servletResponse).getWriter();
             out.write("{\n" +" \"status\": 10007,\n" + "    \"msg\": \"NEED_LOGIN\",\n" + "    \"data\": null\n" + "}");

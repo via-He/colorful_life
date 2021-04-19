@@ -27,6 +27,10 @@ public interface SignService {
     PageInfo selectSignList(Integer pageNum, Integer pageSize);
 
     Integer selectSignNum(Integer userId);
+
+    PageInfo listSignByChannelName(Integer pageNum, Integer pageSize, String channelName);
+
+    PageInfo listAllByChannelName(Integer pageNum, Integer pageSize, String channelName);
 }
 
 

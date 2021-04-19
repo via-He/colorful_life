@@ -1,5 +1,7 @@
 package com.hqq.colorful_life.model.service.serviceImpl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hqq.colorful_life.exception.ExceptionEnum;
 import com.hqq.colorful_life.exception.UniteException;
 import com.hqq.colorful_life.filter.UserFilter;
@@ -14,6 +16,9 @@ import javax.annotation.Resource;
 import com.hqq.colorful_life.model.dao.CreateItemMapper;
 import com.hqq.colorful_life.model.domain.CreateItem;
 import com.hqq.colorful_life.model.service.CreateItemService;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 /**
  * @author Qingqing.He
@@ -114,6 +119,23 @@ public class CreateItemServiceImpl implements CreateItemService {
             throw new UniteException(ExceptionEnum.CREATE_FAILED);
         }
         return i;
+    }
+
+    @Override
+    public PageInfo listAll(Integer pageNum,Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        Integer id = UserFilter.currentUser.getId();
+        List<CreateItem> createItems = createItemMapper.listAll(id);
+        PageInfo<CreateItem> createItemPageInfo = new PageInfo<>(createItems);
+        return  createItemPageInfo;
+    }
+
+    @Override
+    public PageInfo selectByChannelName(Integer pageNum, Integer pageSize, String channelName) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<CreateItem> createItems = createItemMapper.selectByChannelName(channelName);
+        PageInfo<CreateItem> createItemPageInfo = new PageInfo<>(createItems);
+        return createItemPageInfo;
     }
 
 }

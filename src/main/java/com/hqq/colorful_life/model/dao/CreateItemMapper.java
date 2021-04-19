@@ -2,6 +2,8 @@ package com.hqq.colorful_life.model.dao;
 
 import com.hqq.colorful_life.model.domain.CreateItem;
 
+import java.util.List;
+
 
 /**
  * @author Qingqing.He
@@ -19,4 +21,8 @@ public interface CreateItemMapper {
     int updateByPrimaryKeySelective(CreateItem record);
 
     int updateByPrimaryKey(CreateItem record);
+
+    List<CreateItem> listAll(Integer id);
+
+    List<CreateItem> selectByChannelName(String channelName);
 }
