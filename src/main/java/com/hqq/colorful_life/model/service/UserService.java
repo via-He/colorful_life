@@ -33,6 +33,6 @@ public interface UserService {
 
     void update(User user);
 
-    List<User> findUserOrderBySignNum();
+    PageInfo findUserOrderBySignNum(Integer pageNum, Integer pageSize);
 }
 

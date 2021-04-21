@@ -77,8 +77,6 @@ public class FunctionController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
         try {
             getUri = getHost(new URI(servletRequest.getRequestURI()+""))+
                 "/images/"+newFileName;
@@ -114,19 +112,9 @@ public class FunctionController {
 
     @ApiOperation("签到排行")
     @GetMapping("/signOrder")
-    public ApiRestResponse signOrder(){
-        List<User> users = userService.findUserOrderBySignNum();
-        //为了安全性将id和密码返回为空
-
-        ArrayList<User> newUser = new ArrayList<>();
-        for (int i = 0; i < users.size(); i++) {
-            User user = users.get(i);
-            user.setId(null);
-            user.setPassword("");
-
-            newUser.add(user);
-        }
-        return ApiRestResponse.success(newUser);
+    public ApiRestResponse signOrder(@RequestParam Integer pageNum,@RequestParam Integer pageSize){
+        PageInfo userOrderBySignNum = userService.findUserOrderBySignNum(pageNum, pageSize);
+        return ApiRestResponse.success(userOrderBySignNum);
     }
 
     @ApiOperation("根据指定频道名称查询签到内容")

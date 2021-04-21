@@ -18,6 +18,7 @@ import com.hqq.colorful_life.model.dao.UserMapper;
 import com.hqq.colorful_life.model.service.UserService;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -121,10 +122,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findUserOrderBySignNum() {
-
+    public PageInfo findUserOrderBySignNum(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
         List<User> users = userMapper.selectAllUser();
-        return users;
+        ArrayList<User> newUsers = new ArrayList<>();
+        for (int i = 0; i < users.size(); i++) {
+            User user = users.get(i);
+            user.setId(null);
+            //为了安全性将id和密码返回为空
+            user.setPassword("");
+            newUsers.add(user);
+        }
+        PageInfo<User> userPageInfo = new PageInfo<>(users);
+        userPageInfo.setList(newUsers);
+        return userPageInfo;
     }
 
 }
