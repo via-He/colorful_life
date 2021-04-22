@@ -4,11 +4,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-
-/**
- * @author Qingqing.He
- * @date 2021/3/22 10:02
- */
 @ApiModel(value = "com.hqq.colorful_life.model.domain.SysUser")
 @Data
 public class SysUser {
@@ -23,4 +18,10 @@ public class SysUser {
 
     @ApiModelProperty(value = "null")
     private String password;
+
+    /**
+     * 角色控制
+     */
+    @ApiModelProperty(value = "角色控制")
+    private Integer role;
 }

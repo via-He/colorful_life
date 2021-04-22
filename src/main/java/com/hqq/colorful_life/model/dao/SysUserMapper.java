@@ -2,11 +2,6 @@ package com.hqq.colorful_life.model.dao;
 
 import com.hqq.colorful_life.model.domain.SysUser;import org.apache.ibatis.annotations.Param;
 
-
-/**
- * @author Qingqing.He
- * @date 2021/3/22 10:02
- */
 public interface SysUserMapper {
     int deleteByPrimaryKey(Integer id);
 

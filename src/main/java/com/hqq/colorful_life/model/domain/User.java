@@ -5,11 +5,6 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import lombok.Data;
 
-
-/**
- * @author Qingqing.He
- * @date 2021/4/7 14:35
- */
 @ApiModel(value = "com.hqq.colorful_life.model.domain.User")
 @Data
 public class User {
@@ -72,4 +67,10 @@ public class User {
      */
     @ApiModelProperty(value = "更新时间")
     private Date updateTime;
+
+    /**
+     * 角色控制
+     */
+    @ApiModelProperty(value = "角色控制")
+    private Integer role;
 }

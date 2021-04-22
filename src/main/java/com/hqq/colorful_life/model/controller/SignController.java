@@ -59,7 +59,7 @@ public class SignController {
 
     }
 
-    @ApiOperation("查看签到")
+    @ApiOperation("根据当前用户id查看所有签到")
     @GetMapping("/listSign")
     public ApiRestResponse listSign(@RequestParam Integer pageNum, @RequestParam Integer pageSize){
 
@@ -75,7 +75,7 @@ public class SignController {
         return ApiRestResponse.success(sign);
     }
 
-    @ApiOperation("查询签到次数")
+    @ApiOperation("查询个人签到次数")
     @GetMapping("/signNum")
     public ApiRestResponse selectSignNum(){
 

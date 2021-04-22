@@ -37,18 +37,17 @@ public class AdminFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws
                                                                                                                   IOException,
                                                                                                                   ServletException {
-        System.out.println("=====================================过滤器aaaaaaaa");
         HttpServletRequest request = (HttpServletRequest) servletRequest;
-       /* HttpServletResponse response = (HttpServletResponse) servletResponse;
-        response.setHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
+        response.setHeader("Access-Control-Allow-Origin", "Origin");
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT, GET");
-        response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Allow-Headers", "x-requested-with");*/
+        response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
+//        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Allow-Credentials","true");
 
         HttpSession session = request.getSession();
-        Object attribute = session.getAttribute(Constant.USER);
-        currentSysUser = (SysUser) attribute;
-        if (attribute == null) {
+        currentSysUser = (SysUser)session.getAttribute(Constant.USER);
+        if (currentSysUser == null) {
             PrintWriter out = new HttpServletResponseWrapper((HttpServletResponse) servletResponse).getWriter();
             out.write(
                 "{\n" + " \"status\": 10007,\n" + "    \"msg\": \"NEED_LOGIN\",\n" + "    \"data\": null\n" + "}");
@@ -58,7 +57,8 @@ public class AdminFilter implements Filter {
         }
 
 
-        if (attribute instanceof User) {
+        if (currentSysUser.getRole() == 0) {
+
             PrintWriter out = new HttpServletResponseWrapper((HttpServletResponse) servletResponse).getWriter();
             out.write(
                 "{\n" + "    \"status\": 10009,\n" + "    \"msg\": \"NEED_ADMIN\",\n" + "    " + "\"data\": null\n" + "}");

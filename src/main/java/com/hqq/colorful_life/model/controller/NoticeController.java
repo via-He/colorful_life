@@ -33,9 +33,9 @@ public class NoticeController {
     }
 
     @PostMapping("/admin/addNotice")
-    public ApiRestResponse addNotice(@RequestParam String comment){
+    public ApiRestResponse addNotice(@RequestParam String content){
 
-        noticeService.insertSelective(comment);
+        noticeService.insertSelective(content);
         return ApiRestResponse.success();
     }
 

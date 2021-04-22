@@ -2,11 +2,6 @@ package com.hqq.colorful_life.model.dao;
 
 import com.hqq.colorful_life.model.domain.User;import org.apache.ibatis.annotations.Param;import java.util.List;
 
-
-/**
- * @author Qingqing.He
- * @date 2021/4/7 14:35
- */
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
 

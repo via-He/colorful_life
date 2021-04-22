@@ -1,6 +1,7 @@
 package com.hqq.colorful_life.model.dao;
 
 import com.hqq.colorful_life.model.domain.Comment;
+import com.hqq.colorful_life.model.domain.CreateItem;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

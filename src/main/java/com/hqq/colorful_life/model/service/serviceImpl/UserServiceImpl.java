@@ -123,7 +123,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public PageInfo findUserOrderBySignNum(Integer pageNum, Integer pageSize) {
-        PageHelper.startPage(pageNum,pageSize);
+        PageHelper.startPage(pageNum, pageSize);
         List<User> users = userMapper.selectAllUser();
         ArrayList<User> newUsers = new ArrayList<>();
         for (int i = 0; i < users.size(); i++) {
@@ -139,5 +139,6 @@ public class UserServiceImpl implements UserService {
     }
 
 }
+
 
 

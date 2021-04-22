@@ -159,7 +159,7 @@ public class UserController {
         SysUser sysUser = sysUserService.login(userName, password);
         sysUser.setPassword(null);
         session.setAttribute(Constant.USER, sysUser);
-
+        log.info("当前正在登录的管理员用户："+ session.getAttribute(Constant.USER));
         return ApiRestResponse.success(sysUser);
 
     }

@@ -7,10 +7,11 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="role" jdbcType="INTEGER" property="role" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, user_name, `password`
+    id, user_name, `password`, `role`
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -26,10 +27,10 @@
   </delete>
   <insert id="insert" parameterType="com.hqq.colorful_life.model.domain.SysUser">
     <!--@mbg.generated-->
-    insert into sys_user (id, user_name, `password`
-      )
-    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
-      )
+    insert into sys_user (id, user_name, `password`, 
+      `role`)
+    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{role,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.hqq.colorful_life.model.domain.SysUser">
     <!--@mbg.generated-->
@@ -44,6 +45,9 @@
       <if test="password != null">
         `password`,
       </if>
+      <if test="role != null">
+        `role`,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -54,6 +58,9 @@
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -67,6 +74,9 @@
       <if test="password != null">
         `password` = #{password,jdbcType=VARCHAR},
       </if>
+      <if test="role != null">
+        `role` = #{role,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -74,7 +84,8 @@
     <!--@mbg.generated-->
     update sys_user
     set user_name = #{userName,jdbcType=VARCHAR},
-      `password` = #{password,jdbcType=VARCHAR}
+      `password` = #{password,jdbcType=VARCHAR},
+      `role` = #{role,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
     <select id="selectLogin" resultMap="BaseResultMap" resultType="map">
