@@ -1,5 +1,6 @@
 package com.hqq.colorful_life.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
@@ -32,8 +33,10 @@ public class Recommendation {
     private Integer createId;
 
     @ApiModelProperty(value = "null")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date createTime;
 
     @ApiModelProperty(value = "null")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date updateTime;
 }

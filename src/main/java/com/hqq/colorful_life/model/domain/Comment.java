@@ -1,5 +1,6 @@
 package com.hqq.colorful_life.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
@@ -40,6 +41,7 @@ public class Comment {
     /**
      * 评论时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @ApiModelProperty(value = "评论时间")
     private Date createTime;
 }

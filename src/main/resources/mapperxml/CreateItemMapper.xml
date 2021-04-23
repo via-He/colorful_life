@@ -152,4 +152,9 @@
       where channel_name = #{channelName}
       order by update_time desc
     </select>
+    <select id="listAllForAdmin" resultMap="BaseResultMap">
+      select <include refid="Base_Column_List"/>
+      from create_item
+      order by update_time desc
+    </select>
 </mapper>

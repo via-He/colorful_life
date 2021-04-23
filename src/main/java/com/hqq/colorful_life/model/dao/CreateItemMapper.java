@@ -25,4 +25,6 @@ public interface CreateItemMapper {
     List<CreateItem> listAll(Integer id);
 
     List<CreateItem> selectByChannelName(String channelName);
+
+    List<CreateItem> listAllForAdmin();
 }

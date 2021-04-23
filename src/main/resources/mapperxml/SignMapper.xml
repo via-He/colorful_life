@@ -192,4 +192,8 @@
       where channel_name = #{channelName}
       order by update_time desc
     </select>
+    <select id="listSignForAdmin" resultMap="BaseResultMap">
+      select <include refid="Base_Column_List"/> from sign
+      order by update_time desc
+    </select>
 </mapper>

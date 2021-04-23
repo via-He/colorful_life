@@ -33,6 +33,8 @@ public interface CreateItemService {
     PageInfo listAll(Integer pageNum,Integer pageSize);
 
     PageInfo selectByChannelName(Integer pageNum, Integer pageSize, String channelName);
+
+    PageInfo listAllForAdmin(Integer pageNum, Integer pageSize);
 }
 
 

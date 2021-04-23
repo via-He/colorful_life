@@ -45,6 +45,13 @@ public class CreateItemController {
         return ApiRestResponse.success(pageInfo);
 
     }
+    @ApiModelProperty("后台查看所有瞬间内容")
+    @GetMapping("/admin/listAllForAdmin")
+    public ApiRestResponse listAllForAdmin(@RequestParam Integer pageNum,@RequestParam Integer pageSize){
+        PageInfo pageInfo = createItemService.listAllForAdmin(pageNum,pageSize);
+        return ApiRestResponse.success(pageInfo);
+
+    }
 
     @GetMapping("/delete")
     public ApiRestResponse delete(@RequestParam Integer createItemId){

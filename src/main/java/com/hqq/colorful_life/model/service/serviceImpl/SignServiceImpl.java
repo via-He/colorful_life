@@ -166,6 +166,15 @@ public class SignServiceImpl implements SignService {
         return pageInfo;
     }
 
+    @Override
+    public PageInfo listSignForAdmin(Integer pageNum, Integer pageSize) {
+
+        PageHelper.startPage(pageNum,pageSize);
+        List<Sign> signs = signMapper.listSignForAdmin();
+        PageInfo<Sign> signPageInfo = new PageInfo<>(signs);
+        return signPageInfo;
+    }
+
 }
 
 

@@ -26,6 +26,7 @@ public class AdminFilterConfig {
         filterFilterRegistrationBean.setFilter(adminFilter());
         filterFilterRegistrationBean.addUrlPatterns("/user/admin/*");
         filterFilterRegistrationBean.addUrlPatterns("/notice/admin/*");
+        filterFilterRegistrationBean.addUrlPatterns("/admin/*");
         filterFilterRegistrationBean.setName("adminFilterConf");
         return filterFilterRegistrationBean;
     }

@@ -29,4 +29,5 @@ public interface SignMapper {
 
     List<Sign> selectByChannelName(String channelName);
 
+    List<Sign> listSignForAdmin();
 }

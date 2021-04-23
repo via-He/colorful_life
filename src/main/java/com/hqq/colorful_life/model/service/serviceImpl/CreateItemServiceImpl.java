@@ -138,6 +138,15 @@ public class CreateItemServiceImpl implements CreateItemService {
         return createItemPageInfo;
     }
 
+    @Override
+    public PageInfo listAllForAdmin(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<CreateItem> createItems = createItemMapper.listAllForAdmin();
+        PageInfo<CreateItem> createItemPageInfo = new PageInfo<>(createItems);
+        return createItemPageInfo;
+
+    }
+
 }
 
 

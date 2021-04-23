@@ -39,7 +39,8 @@ public class AdminFilter implements Filter {
                                                                                                                   ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        response.setHeader("Access-Control-Allow-Origin", "Origin");
+        String origin = request.getHeader("Origin");
+        response.setHeader("Access-Control-Allow-Origin", origin);
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT, GET");
         response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
 //        response.setHeader("Access-Control-Max-Age", "3600");

@@ -60,7 +60,7 @@ public class UserController {
     }
 
     @ApiOperation("分页查询所有用户")
-    @PostMapping("/admin/allUser")
+    @GetMapping("/admin/allUser")
     public ApiRestResponse personalPage(@RequestParam Integer pageNum, @RequestParam Integer pageSize){
         PageInfo pageInfo = userService.selectUserList(pageNum, pageSize);
         return ApiRestResponse.success(pageInfo);

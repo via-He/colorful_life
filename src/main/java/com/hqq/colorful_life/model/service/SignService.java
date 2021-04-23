@@ -31,6 +31,8 @@ public interface SignService {
     PageInfo listSignByChannelName(Integer pageNum, Integer pageSize, String channelName);
 
     PageInfo listAllByChannelName(Integer pageNum, Integer pageSize, String channelName);
+
+    PageInfo listSignForAdmin(Integer pageNum, Integer pageSize);
 }
 
 
