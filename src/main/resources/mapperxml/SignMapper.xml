@@ -180,6 +180,7 @@
       <include refid="Base_Column_List" />
       from sign
       where user_id = #{userId,jdbcType=INTEGER}
+      order by update_time desc
     </select>
     <select id="selectSignNum" parameterType="java.lang.Integer" resultType="java.lang.Integer">
       select count(*)
