@@ -1,5 +1,6 @@
 package com.hqq.colorful_life.model.service;
 
+import com.github.pagehelper.PageInfo;
 import com.hqq.colorful_life.model.domain.Recommendation;
 
 /**
@@ -21,6 +22,7 @@ public interface RecommendationService {
 
     int updateByPrimaryKey(Recommendation record);
 
+    PageInfo selectListAll(Integer pageNum, Integer pageSize);
 }
 
 

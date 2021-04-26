@@ -2,6 +2,8 @@ package com.hqq.colorful_life.model.dao;
 
 import com.hqq.colorful_life.model.domain.Recommendation;
 
+import java.util.List;
+
 
 /**
  * @author Qingqing.He
@@ -19,4 +21,6 @@ public interface RecommendationMapper {
     int updateByPrimaryKeySelective(Recommendation record);
 
     int updateByPrimaryKey(Recommendation record);
+
+    List<Recommendation> selectListAll();
 }
