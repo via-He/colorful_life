@@ -1,5 +1,6 @@
 package com.hqq.colorful_life.model.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -84,8 +85,10 @@ public class MomentAndSignResp {
      * 签到时间
      */
     @ApiModelProperty(value = "签到时间")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date signUpdateTime;
 
     @ApiModelProperty(value = "null")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date createUpdateTime;
 }

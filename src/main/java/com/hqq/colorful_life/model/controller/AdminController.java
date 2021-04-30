@@ -5,6 +5,7 @@ import com.hqq.colorful_life.common.ApiRestResponse;
 import com.hqq.colorful_life.model.service.CreateItemService;
 import com.hqq.colorful_life.model.service.SignService;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,5 +39,19 @@ public class AdminController {
         PageInfo pageInfo = signService.listSignForAdmin(pageNum,pageSize);
         return ApiRestResponse.success(pageInfo);
 
+    }
+
+    @ApiOperation("删除签到")
+    @GetMapping("/deleteSign")
+    public ApiRestResponse deleteSign(@RequestParam Integer signId){
+
+        int i = signService.deleteByPrimaryKey(signId);
+        return ApiRestResponse.success(i);
+    }
+
+    @GetMapping("/deleteMoment")
+    public ApiRestResponse deleteMoment(@RequestParam Integer createItemId){
+        createItemService.deleteByPrimaryKey(createItemId);
+        return ApiRestResponse.success();
     }
 }

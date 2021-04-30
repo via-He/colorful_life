@@ -71,10 +71,7 @@ public class CreateItemServiceImpl implements CreateItemService {
     }
 
     @Override
-    public void create(AddCreateItemReq addCreateItemReq) {
-
-        CreateItem createItem = new CreateItem();
-        BeanUtils.copyProperties(addCreateItemReq,createItem);
+    public void create(CreateItem createItem) {
         int i = createItemMapper.insertSelective(createItem);
         if (i == 0) {
             throw new UniteException(ExceptionEnum.CREATE_FAILED);
@@ -145,6 +142,14 @@ public class CreateItemServiceImpl implements CreateItemService {
         PageInfo<CreateItem> createItemPageInfo = new PageInfo<>(createItems);
         return createItemPageInfo;
 
+    }
+
+    @Override
+    public List<CreateItem> selectByUserId(Integer userId) {
+
+        PageHelper.startPage(1,10);
+        List<CreateItem> createItems = createItemMapper.listAll(userId);
+        return createItems;
     }
 
 }

@@ -43,17 +43,8 @@ public class UserController {
     SysUserService sysUserService;
 
     @ApiOperation("查询指定id的用户")
-    @GetMapping("/admin/byId")
+    @GetMapping("/byId")
     public ApiRestResponse personalPage(@RequestParam Integer userId,HttpSession session){
-        Object attribute = session.getAttribute(Constant.USER);
-        if (attribute == null)
-        {
-            throw new UniteException(ExceptionEnum.NEED_LOGIN);
-        }
-        if (attribute instanceof User){
-            throw new UniteException(ExceptionEnum.NEED_ADMIN);
-        }
-
         User user = userService.selectByPrimaryKey(userId);
         log.info("session里是否存在值"+ UserFilter.currentUser);
         return ApiRestResponse.success(user);

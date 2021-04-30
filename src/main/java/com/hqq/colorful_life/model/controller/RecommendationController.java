@@ -35,7 +35,7 @@ public class RecommendationController {
     }
 
 
-    @PostMapping("/listAll")
+    @GetMapping("/listAll")
     public ApiRestResponse listAll(@RequestParam Integer pageNum,@RequestParam Integer pageSize){
         PageInfo pageInfo = recommendationService.selectListAll(pageNum,pageSize);
         return ApiRestResponse.success(pageInfo);

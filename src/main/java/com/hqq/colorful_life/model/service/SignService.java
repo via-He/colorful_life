@@ -3,6 +3,8 @@ package com.hqq.colorful_life.model.service;
 import com.github.pagehelper.PageInfo;
 import com.hqq.colorful_life.model.domain.Sign;
 
+import java.util.List;
+
 /**
  * @author Qingqing.He
  * @date 2021/3/16 10:46
@@ -33,6 +35,8 @@ public interface SignService {
     PageInfo listAllByChannelName(Integer pageNum, Integer pageSize, String channelName);
 
     PageInfo listSignForAdmin(Integer pageNum, Integer pageSize);
+
+    List<Sign> selectByUserId(Integer userId);
 }
 
 

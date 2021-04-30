@@ -3,6 +3,7 @@ package com.hqq.colorful_life.model.controller;
 import com.github.pagehelper.PageInfo;
 import com.hqq.colorful_life.common.ApiRestResponse;
 import com.hqq.colorful_life.filter.UserFilter;
+import com.hqq.colorful_life.model.domain.CreateItem;
 import com.hqq.colorful_life.model.request.AddCreateItemReq;
 import com.hqq.colorful_life.model.service.CreateItemService;
 import io.swagger.annotations.ApiModelProperty;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author Qingqing.He
@@ -31,9 +34,13 @@ public class CreateItemController {
     CreateItemService createItemService;
 
     @PostMapping("/add")
-    public ApiRestResponse addCreateItem(@Valid @RequestBody AddCreateItemReq addCreateItemReq){
+    public ApiRestResponse addCreateItem(@RequestParam String content,@RequestParam String channelName){
+        CreateItem addCreateItemReq = new CreateItem();
         Integer userId = UserFilter.currentUser.getId();
         addCreateItemReq.setUserId(userId);
+        addCreateItemReq.setContent(content);
+        addCreateItemReq.setChannelName(channelName);
+        addCreateItemReq.setMediaUrl(FunctionController.getUri);
         createItemService.create(addCreateItemReq);
         return ApiRestResponse.success();
     }
@@ -45,11 +52,12 @@ public class CreateItemController {
         return ApiRestResponse.success(pageInfo);
 
     }
-    @ApiModelProperty("后台查看所有瞬间内容")
-    @GetMapping("/admin/listAllForAdmin")
-    public ApiRestResponse listAllForAdmin(@RequestParam Integer pageNum,@RequestParam Integer pageSize){
-        PageInfo pageInfo = createItemService.listAllForAdmin(pageNum,pageSize);
-        return ApiRestResponse.success(pageInfo);
+
+    @ApiModelProperty("查看指定用户的最新十条瞬间内容")
+    @GetMapping("/listByUserId")
+    public ApiRestResponse listByUserId(Integer userId){
+        List<CreateItem> createItems = createItemService.selectByUserId(userId);
+        return ApiRestResponse.success(createItems);
 
     }
 

@@ -175,6 +175,14 @@ public class SignServiceImpl implements SignService {
         return signPageInfo;
     }
 
+    @Override
+    public List<Sign> selectByUserId(Integer userId) {
+
+        PageHelper.startPage(1,10);
+        List<Sign> signs = signMapper.selectAllSign(userId);
+        return signs;
+    }
+
 }
 
 

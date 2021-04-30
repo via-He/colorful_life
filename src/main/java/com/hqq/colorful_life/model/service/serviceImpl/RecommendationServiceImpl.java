@@ -1,5 +1,6 @@
 package com.hqq.colorful_life.model.service.serviceImpl;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hqq.colorful_life.exception.ExceptionEnum;
@@ -71,7 +72,6 @@ public class RecommendationServiceImpl implements RecommendationService {
     @Override
     public PageInfo selectListAll(Integer pageNum, Integer pageSize) {
 
-        PageHelper.startPage(pageNum,pageSize);
         List<Recommendation> recommendations = recommendationMapper.selectListAll();
         ArrayList<CreateItem> createItems = new ArrayList<>();
         for (int i = 0; i < recommendations.size(); i++) {
@@ -79,8 +79,19 @@ public class RecommendationServiceImpl implements RecommendationService {
             CreateItem createItem = createItemMapper.selectByPrimaryKey(recommendation.getCreateId());
             createItems.add(createItem);
         }
-        PageInfo<CreateItem> createItemPageInfo = new PageInfo<>(createItems);
-        return createItemPageInfo;
+        //创建Page类
+        Page page = new Page(pageNum, pageSize);
+        //为Page类中的total属性赋值
+        int total = createItems.size();
+        page.setTotal(total);
+        //计算当前需要显示的数据下标起始值
+        int startIndex = (pageNum -1)*pageSize;
+        int endIndex = Math.min(startIndex + pageSize,total);
+        //从链表中截取需要显示的子链表，并加入到Page
+        page.addAll(createItems.subList(startIndex,endIndex));
+        //以Page创建PageInfo
+        PageInfo pageInfo = new PageInfo<>(page);
+        return pageInfo;
 
     }
 

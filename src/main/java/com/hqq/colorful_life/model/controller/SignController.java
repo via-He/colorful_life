@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author Qingqing.He
@@ -46,6 +47,7 @@ public class SignController {
         sign.setChannelName(channelName);
         sign.setContent(content);
         sign.setTitle(title);
+        sign.setSignStatus(1);
         int i = signService.insertSelective(sign);
         //签到成功，签到次数加一
         if (i == 1){
@@ -65,6 +67,14 @@ public class SignController {
 
         PageInfo pageInfo = signService.selectSignList(pageNum, pageSize);
         return ApiRestResponse.success(pageInfo);
+    }
+
+    @ApiOperation("查看指定用户最新10条签到")
+    @GetMapping("/listByUserId")
+    public ApiRestResponse listByUserId(Integer userId){
+
+        List<Sign> signs = signService.selectByUserId(userId);
+        return ApiRestResponse.success(signs);
     }
 
     @ApiOperation("根据id查看签到详情")
