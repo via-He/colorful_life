@@ -128,7 +128,6 @@ public class UserServiceImpl implements UserService {
         ArrayList<User> newUsers = new ArrayList<>();
         for (int i = 0; i < users.size(); i++) {
             User user = users.get(i);
-            user.setId(null);
             //为了安全性将id和密码返回为空
             user.setPassword("");
             newUsers.add(user);
