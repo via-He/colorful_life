@@ -94,6 +94,12 @@ public class SignController {
         return ApiRestResponse.success(signNum);
     }
 
+    @ApiOperation("点赞")
+    @GetMapping("/pink")
+    public ApiRestResponse pink(@RequestParam Integer signId){
+        signService.addPink(signId);
+        return ApiRestResponse.success();
+    }
     @ApiOperation("删除签到")
     @GetMapping("/delete")
     public ApiRestResponse delete(@RequestParam Integer signId){
@@ -102,9 +108,9 @@ public class SignController {
         return ApiRestResponse.success(i);
     }
 
-    @PostMapping("/comment")
-    public ApiRestResponse comment(@RequestParam Integer signId,@RequestParam String comment){
-        int i = signService.addComment(signId, comment);
+    @GetMapping("/comment")
+    public ApiRestResponse comment(@RequestParam Integer signId,@RequestParam String content){
+        int i = signService.addComment(signId, content);
         return ApiRestResponse.success(i);
     }
 }

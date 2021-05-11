@@ -7,6 +7,7 @@ import com.hqq.colorful_life.exception.UniteException;
 import com.hqq.colorful_life.filter.UserFilter;
 import com.hqq.colorful_life.model.dao.CommentMapper;
 import com.hqq.colorful_life.model.domain.Comment;
+import com.hqq.colorful_life.model.domain.Sign;
 import com.hqq.colorful_life.model.domain.User;
 import com.hqq.colorful_life.model.request.AddCreateItemReq;
 import com.hqq.colorful_life.model.service.UserService;
@@ -16,6 +17,7 @@ import javax.annotation.Resource;
 import com.hqq.colorful_life.model.dao.CreateItemMapper;
 import com.hqq.colorful_life.model.domain.CreateItem;
 import com.hqq.colorful_life.model.service.CreateItemService;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -81,7 +83,7 @@ public class CreateItemServiceImpl implements CreateItemService {
     @Override
     public void addPink(Integer createItemId) {
         if (createItemId == null) {
-            throw new UniteException(ExceptionEnum.REQUEST_PARAM_ERROR);
+            throw new UniteException(ExceptionEnum.PARAM_NOT_NULL);
         }
         CreateItem createItem = createItemMapper.selectByPrimaryKey(createItemId);
         //如果点赞数为null或为0，则值置1，若不为空，则值+1
@@ -101,13 +103,14 @@ public class CreateItemServiceImpl implements CreateItemService {
     @Override
     public int addComment(Integer createItemId,String comment) {
         if (createItemId == null) {
-            throw new UniteException(ExceptionEnum.REQUEST_PARAM_ERROR);
+            throw new UniteException(ExceptionEnum.PARAM_NOT_NULL);
         }
         CreateItem createItem = createItemMapper.selectByPrimaryKey(createItemId);
         Integer userId = createItem.getUserId();
 
         //将评论内容添加到评论表
         Comment newComment = new Comment();
+        newComment.setReviewer(UserFilter.currentUser.getId());
         newComment.setUserId(userId);
         newComment.setContent(comment);
         newComment.setCreateId(createItemId);
@@ -150,6 +153,19 @@ public class CreateItemServiceImpl implements CreateItemService {
         PageHelper.startPage(1,10);
         List<CreateItem> createItems = createItemMapper.listAll(userId);
         return createItems;
+    }
+
+    @Override
+    public PageInfo selectListByKeyword(Integer pageNum, Integer pageSize, String keyWord) {
+
+        if (!StringUtils.isEmpty(keyWord)){
+            String newKeyWord = new StringBuilder().append("%").append(keyWord).append("%").toString();
+            keyWord = newKeyWord;
+        }
+        PageHelper.startPage(pageNum,pageSize);
+        List<CreateItem> createItems = createItemMapper.selectListByKeyword(keyWord);
+        PageInfo<CreateItem> createItemPageInfo = new PageInfo<>(createItems);
+        return createItemPageInfo;
     }
 
 }

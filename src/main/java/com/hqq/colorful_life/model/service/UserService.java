@@ -34,6 +34,8 @@ public interface UserService {
     void update(User user);
 
     PageInfo findUserOrderBySignNum(Integer pageNum, Integer pageSize);
+
+    PageInfo selectListByKeyword(Integer pageNum, Integer pageSize, String keyWord);
 }
 
 

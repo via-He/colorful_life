@@ -19,6 +19,7 @@ import javax.annotation.Resource;
 import com.hqq.colorful_life.model.domain.Sign;
 import com.hqq.colorful_life.model.dao.SignMapper;
 import com.hqq.colorful_life.model.service.SignService;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
@@ -84,6 +85,7 @@ public class SignServiceImpl implements SignService {
 
         //将评论内容添加到评论表
         Comment newComment = new Comment();
+        newComment.setReviewer(UserFilter.currentUser.getId());
         newComment.setUserId(userId);
         newComment.setContent(comment);
         newComment.setSignId(signId);
@@ -181,6 +183,39 @@ public class SignServiceImpl implements SignService {
         PageHelper.startPage(1,10);
         List<Sign> signs = signMapper.selectAllSign(userId);
         return signs;
+    }
+
+    @Override
+    public void addPink(Integer signId) {
+        if (signId == null) {
+            throw new UniteException(ExceptionEnum.REQUEST_PARAM_ERROR);
+        }
+        Sign sign = signMapper.selectByPrimaryKey(signId);
+        //如果点赞数为null或为0，则值置1，若不为空，则值+1
+        Long pinkNum = sign.getPinkNum();
+        if (pinkNum == null ||pinkNum == 0){
+            pinkNum = 1L;
+        }else {
+            pinkNum++;
+        }
+        sign.setPinkNum(pinkNum);
+        int i = signMapper.updateByPrimaryKeySelective(sign);
+        if (i == 0){
+            throw new UniteException(ExceptionEnum.UPDATE_FAILED);
+        }
+    }
+
+    @Override
+    public PageInfo selectListByKeyword(Integer pageNum, Integer pageSize, String keyWord) {
+        if (!StringUtils.isEmpty(keyWord)){
+            String newKeyWord = new StringBuilder().append("%").append(keyWord).append("%").toString();
+            keyWord = newKeyWord;
+        }
+        PageHelper.startPage(pageNum,pageSize);
+        List<Sign> signs = signMapper.selectListByKeyword(keyWord);
+        PageInfo<Sign> signPageInfo = new PageInfo<>(signs);
+        return signPageInfo;
+
     }
 
 }

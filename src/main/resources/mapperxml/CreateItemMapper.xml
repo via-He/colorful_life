@@ -157,4 +157,14 @@
       from create_item
       order by update_time desc
     </select>
+    <select id="selectListByKeyword" resultMap="BaseResultMap" parameterType="java.lang.String">
+      select <include refid="Base_Column_List"/>
+      from create_item
+      <where>
+        <if test="keyword != null and keyword != ''">
+          and content like #{keyword}
+        </if>
+      </where>
+      order by update_time desc
+    </select>
 </mapper>

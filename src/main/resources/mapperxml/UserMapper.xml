@@ -182,4 +182,15 @@
       from user
       order by sign_num desc
     </select>
+    <select id="selectListByKeyword" resultMap="BaseResultMap" parameterType="java.lang.String">
+      select
+      <include refid="Base_Column_List" />
+      from user
+      <where>
+        <if test="keyword != null and keyword != ''">
+          and user_name like #{keyword}
+        </if>
+      </where>
+      order by update_time desc
+    </select>
 </mapper>

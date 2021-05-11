@@ -6,11 +6,6 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import lombok.Data;
 
-
-/**
- * @author Qingqing.He
- * @date 2021/3/23 10:45
- */
 @ApiModel(value = "com.hqq.colorful_life.model.domain.Comment")
 @Data
 public class Comment {
@@ -29,6 +24,12 @@ public class Comment {
     @ApiModelProperty(value = "null")
     private Integer createId;
 
+    /**
+     * 评论者
+     */
+    @ApiModelProperty(value = "评论者")
+    private Integer reviewer;
+
     @ApiModelProperty(value = "null")
     private Integer signId;
 
@@ -41,7 +42,7 @@ public class Comment {
     /**
      * 评论时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd")
     @ApiModelProperty(value = "评论时间")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date createTime;
 }

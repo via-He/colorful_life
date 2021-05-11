@@ -197,4 +197,16 @@
       select <include refid="Base_Column_List"/> from sign
       order by update_time desc
     </select>
+  <select id="selectListByKeyword" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from sign
+    <where>
+      <if test="keyword != null and keyword != ''">
+        and content like #{keyword}
+        or title like #{keyword}
+      </if>
+    </where>
+    order by update_time desc
+  </select>
 </mapper>

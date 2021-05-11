@@ -73,9 +73,9 @@ public class CreateItemController {
         return ApiRestResponse.success();
     }
 
-    @PostMapping("/comment")
-    public ApiRestResponse comment(@RequestParam Integer createItemId,@RequestParam String comment){
-        int i = createItemService.addComment(createItemId, comment);
+    @GetMapping("/comment")
+    public ApiRestResponse comment(@RequestParam Integer createItemId,@RequestParam String content){
+        int i = createItemService.addComment(createItemId, content);
         return ApiRestResponse.success(i);
     }
 }

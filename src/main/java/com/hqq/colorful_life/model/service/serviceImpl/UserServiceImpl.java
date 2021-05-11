@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.hqq.colorful_life.exception.ExceptionEnum;
 import com.hqq.colorful_life.exception.UniteException;
 import com.hqq.colorful_life.filter.UserFilter;
+import com.hqq.colorful_life.model.domain.CreateItem;
 import com.hqq.colorful_life.model.request.UpdateUserReq;
 import com.hqq.colorful_life.util.MD5Utils;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import com.hqq.colorful_life.model.domain.User;
 import com.hqq.colorful_life.model.dao.UserMapper;
 import com.hqq.colorful_life.model.service.UserService;
+import org.springframework.util.StringUtils;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -135,6 +137,19 @@ public class UserServiceImpl implements UserService {
         PageInfo<User> userPageInfo = new PageInfo<>(users);
         userPageInfo.setList(newUsers);
         return userPageInfo;
+    }
+
+    @Override
+    public PageInfo selectListByKeyword(Integer pageNum, Integer pageSize, String keyWord) {
+
+        if (!StringUtils.isEmpty(keyWord)){
+            String newKeyWord = new StringBuilder().append("%").append(keyWord).append("%").toString();
+            keyWord = newKeyWord;
+        }
+        PageHelper.startPage(pageNum,pageSize);
+        List<User> users = userMapper.selectListByKeyword(keyWord);
+        PageInfo<User> createItemPageInfo = new PageInfo<>(users);
+        return createItemPageInfo;
     }
 
 }

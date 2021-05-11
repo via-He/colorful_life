@@ -75,7 +75,7 @@ public class UserController {
             return ApiRestResponse.error(ExceptionEnum.NEED_PASSWORD);
         }
 
-        if (password.length() < 8){
+        if (password.length() < 8 || password.length() > 15){
             return ApiRestResponse.error(ExceptionEnum.PASSWORD_TOO_SHORT);
         }
         userService.register(userName,password);

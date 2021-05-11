@@ -1,6 +1,7 @@
 package com.hqq.colorful_life.model.dao;
 
 import com.hqq.colorful_life.model.domain.CreateItem;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -27,4 +28,6 @@ public interface CreateItemMapper {
     List<CreateItem> selectByChannelName(String channelName);
 
     List<CreateItem> listAllForAdmin();
+
+    List<CreateItem> selectListByKeyword(@Param("keyword") String keyword);
 }

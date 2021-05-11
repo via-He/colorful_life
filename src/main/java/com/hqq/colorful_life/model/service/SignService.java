@@ -37,6 +37,10 @@ public interface SignService {
     PageInfo listSignForAdmin(Integer pageNum, Integer pageSize);
 
     List<Sign> selectByUserId(Integer userId);
+
+    void addPink(Integer signId);
+
+    PageInfo selectListByKeyword(Integer pageNum, Integer pageSize, String keyWord);
 }
 
 

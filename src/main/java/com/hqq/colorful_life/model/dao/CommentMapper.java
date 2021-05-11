@@ -1,16 +1,7 @@
 package com.hqq.colorful_life.model.dao;
 
-import com.hqq.colorful_life.model.domain.Comment;
-import com.hqq.colorful_life.model.domain.CreateItem;
-import org.apache.ibatis.annotations.Param;
+import com.hqq.colorful_life.model.domain.Comment;import org.apache.ibatis.annotations.Param;import java.util.List;
 
-import java.util.List;
-
-
-/**
- * @author Qingqing.He
- * @date 2021/3/23 10:45
- */
 public interface CommentMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -27,4 +18,8 @@ public interface CommentMapper {
     List<String> ItemDetail(@Param("createItemId") Integer createItemId);
 
     List<String> SignDetail(@Param("signId") Integer signId);
+
+    List<Comment> detail(@Param("signId") Integer signId, @Param("createItemId") Integer createItemId);
+
+    Integer selectCommentNum(@Param("signId") Integer signId, @Param("createItemId") Integer createItemId);
 }

@@ -20,4 +20,6 @@ public interface UserMapper {
     User selectLogin(@Param("userName") String userName, @Param("password") String md5Password);
 
     List<User> selectAllUser();
+
+    List<User> selectListByKeyword(@Param("keyword") String keyWord);
 }

@@ -7,13 +7,14 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="create_id" jdbcType="INTEGER" property="createId" />
+    <result column="reviewer" jdbcType="INTEGER" property="reviewer" />
     <result column="sign_id" jdbcType="INTEGER" property="signId" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, user_id, create_id, sign_id, content, create_time
+    id, user_id, create_id, reviewer, sign_id, content, create_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -29,10 +30,12 @@
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hqq.colorful_life.model.domain.Comment" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into comment (user_id, create_id, sign_id, 
-      content, create_time)
-    values (#{userId,jdbcType=INTEGER}, #{createId,jdbcType=INTEGER}, #{signId,jdbcType=INTEGER}, 
-      #{content,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+    insert into comment (user_id, create_id, reviewer, 
+      sign_id, content, create_time
+      )
+    values (#{userId,jdbcType=INTEGER}, #{createId,jdbcType=INTEGER}, #{reviewer,jdbcType=INTEGER}, 
+      #{signId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hqq.colorful_life.model.domain.Comment" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -43,6 +46,9 @@
       </if>
       <if test="createId != null">
         create_id,
+      </if>
+      <if test="reviewer != null">
+        reviewer,
       </if>
       <if test="signId != null">
         sign_id,
@@ -60,6 +66,9 @@
       </if>
       <if test="createId != null">
         #{createId,jdbcType=INTEGER},
+      </if>
+      <if test="reviewer != null">
+        #{reviewer,jdbcType=INTEGER},
       </if>
       <if test="signId != null">
         #{signId,jdbcType=INTEGER},
@@ -82,6 +91,9 @@
       <if test="createId != null">
         create_id = #{createId,jdbcType=INTEGER},
       </if>
+      <if test="reviewer != null">
+        reviewer = #{reviewer,jdbcType=INTEGER},
+      </if>
       <if test="signId != null">
         sign_id = #{signId,jdbcType=INTEGER},
       </if>
@@ -99,6 +111,7 @@
     update comment
     set user_id = #{userId,jdbcType=INTEGER},
       create_id = #{createId,jdbcType=INTEGER},
+      reviewer = #{reviewer,jdbcType=INTEGER},
       sign_id = #{signId,jdbcType=INTEGER},
       content = #{content,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP}
@@ -114,4 +127,28 @@
     from comment
     where sign_id = #{signId,jdbcType=INTEGER}
   </select>
+  <select id="detail" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+     select <include refid="Base_Column_List" />
+    from comment
+    <where>
+      <if test="signId != null ">
+        and sign_id = #{signId,jdbcType=INTEGER}
+      </if>
+      <if test="createItemId != null">
+        and create_id = #{createItemId,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+    <select id="selectCommentNum" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+      select count(*)
+      from comment
+      <where>
+        <if test="signId != null ">
+          and sign_id = #{signId,jdbcType=INTEGER}
+        </if>
+        <if test="createItemId != null">
+          and create_id = #{createItemId,jdbcType=INTEGER}
+        </if>
+      </where>
+    </select>
 </mapper>

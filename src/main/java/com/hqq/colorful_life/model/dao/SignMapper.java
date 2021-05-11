@@ -2,6 +2,7 @@ package com.hqq.colorful_life.model.dao;
 
 import com.hqq.colorful_life.model.domain.Sign;
 import com.hqq.colorful_life.model.response.MomentAndSignResp;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -30,4 +31,6 @@ public interface SignMapper {
     List<Sign> selectByChannelName(String channelName);
 
     List<Sign> listSignForAdmin();
+
+    List<Sign> selectListByKeyword(@Param("keyword") String keyword);
 }

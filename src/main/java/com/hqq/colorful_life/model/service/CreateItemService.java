@@ -39,6 +39,8 @@ public interface CreateItemService {
     PageInfo listAllForAdmin(Integer pageNum, Integer pageSize);
 
     List<CreateItem> selectByUserId(Integer userId);
+
+    PageInfo selectListByKeyword(Integer pageNum, Integer pageSize, String keyWord);
 }
 
 

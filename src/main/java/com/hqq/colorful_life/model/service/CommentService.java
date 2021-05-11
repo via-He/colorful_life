@@ -5,10 +5,10 @@ import com.hqq.colorful_life.model.domain.Comment;
 import java.util.List;
 
 /**
-*@author Qingqing.He
-*@date 2021/3/16 10:46
-*/
-public interface CommentService{
+ * @author Qingqing.He
+ * @date 2021/3/16 10:46
+ */
+public interface CommentService {
 
 
     int deleteByPrimaryKey(Integer id);
@@ -23,7 +23,12 @@ public interface CommentService{
 
     int updateByPrimaryKey(Comment record);
 
-    List<String> detail(Integer createItemId);
+    List<Comment> detail(Integer signId, Integer createItemId);
 
-    List<String> SignDetail(Integer signId);
+    List<String> momentDetail(Integer createItemId);
+
+    List<String> signDetail(Integer signId);
+
+    Integer commentNum(Integer signId, Integer createItemId);
 }
+
