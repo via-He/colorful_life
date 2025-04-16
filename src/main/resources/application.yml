@@ -1,10 +1,12 @@
 spring:
+  config:
+    import: optional:file:.env[.properties]
   datasource:
-    name: colorfullife
-    url: jdbc:mysql://127.0.0.1:3306/colorfullife?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai
+    name: ${DB}
+    url: ${DB_URL}
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: root
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
   servlet:
     multipart:
       max-request-size: 100MB
