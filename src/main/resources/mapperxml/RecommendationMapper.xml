@@ -24,7 +24,7 @@
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--@mbg.generated-->
     delete from recommendation
-    where id = #{id,jdbcType=INTEGER}
+    where create_id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.hqq.colorful_life.model.domain.Recommendation">
     <!--@mbg.generated-->
